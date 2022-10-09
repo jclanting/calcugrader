@@ -1,0 +1,29 @@
+body {
+    background-color: papayawhip;
+    color: black;
+}
+
+body, input, ::placeholder {
+    font-family: "Verdana";
+    text-align: center;
+}
+
+    button, input {
+        padding: 10px;
+        margin: 10px;
+    }
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.button_container, .type, .grade, .weight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#instructions {
+    margin-bottom: 32px;
+}
