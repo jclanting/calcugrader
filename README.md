@@ -7,6 +7,15 @@ A web application that can calculate your grade average using various percentage
 
 <a href="https://jclanting.github.io/grade-calculator/" target="_blank">Link to website found here.</a>
 
+<h2>Planned Features</h2>
+
+<ul>
+  <li>Add a "Remove grade type" button</li>
+  <li>Automatically input grade data by uploading a file</li>
+  <li>In the needed grade calculator, change grade type input field to a dynamic dropdown menu</li>
+  <li>GPA calculator</li>
+ </ul>
+
 <h2>Built With</h2>
 
 <ul>
