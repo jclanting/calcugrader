@@ -5,7 +5,7 @@
 
 A web application that can calculate your grade average using various percentage weights. Can dynamically add new input fields in order to account for more grade types with different weights. Also has the ability to calculate a grade needed in order to achieve a certain grade average.
 
-Link to website found here.
+<a href="https://jclanting.github.io/grade-calculator/" target="_blank">Link to website found here.</a>
 
 <h2>Built With</h2>
 
