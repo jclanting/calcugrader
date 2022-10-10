@@ -1,8 +1,29 @@
 var arrAll = [];
 var arrWeightedGrades = [];
 var arrGradeTypes = [];
+
+// These values are set to what they are because there are initially 3 rows of inputs
 var inputCount = 3;
 var tab = 10;
+
+function updateArrs() {
+
+    arrAll = [];
+    arrWeightedGrades = [];
+
+    // Storing arrays of grades in arrAll with weight at end
+    for (let i = 0; i < inputCount; i++) {
+        let arrGrades = toArray("grade"+i).map(Number);
+        arrGrades.push(parseInt(document.getElementById("weight"+i).value) / 100);
+        arrAll.push(arrGrades);
+    }
+
+    // Storing weighted grades in arrWeightedGrades
+    for (let i = 0; i < inputCount; i++) {
+        arrWeightedGrades.push(calcWeightGrade(arrAll[i]));
+    }
+
+}
 
 function calcGrade() {
 
@@ -89,26 +110,7 @@ function toArray(string) {
 
 }
 
-function updateArrs() {
-
-    arrAll = [];
-    arrWeightedGrades = [];
-
-    // Storing arrays of grades in arrAll with weight at end
-    for (let i = 0; i < inputCount; i++) {
-        let arrGrades = toArray("grade"+i).map(Number);
-        arrGrades.push(parseInt(document.getElementById("weight"+i).value) / 100);
-        arrAll.push(arrGrades);
-    }
-
-    // Storing weighted grades in arrWeightedGrades
-    for (let i = 0; i < inputCount; i++) {
-        arrWeightedGrades.push(calcWeightGrade(arrAll[i]));
-    }
-
-}
-
-function addInput() {
+function addRow() {
 
     // Dynamically creating input fields
 
@@ -139,5 +141,26 @@ function addInput() {
 
     inputCount++;
     tab += 3;
+
+}
+
+function removeRow() {
+
+    if (inputCount > 1) {
+
+        let inputsArr = ["type", "grade", "weight"]
+        let parent = ""
+        let child = ""
+
+        for (let i = 0; i < inputsArr.length; i++) {
+            parent = document.getElementById(inputsArr[i]);
+            child = document.getElementById(inputsArr[i] + (inputCount - 1));
+            parent.removeChild(child);
+        }
+        
+        inputCount--;
+        tab -= 3;
+
+    }
 
 }
