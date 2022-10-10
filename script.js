@@ -58,7 +58,7 @@ function calcWeightGrade(array) {
 
 function calcNeededGrade() {
 
-    let gradeType = document.getElementById("needed_grade_type").value;
+    let gradeType = document.getElementById("select").value;
     let desiredGrade = parseFloat(document.getElementById("desired_grade").value);
 
     let neededGrade = desiredGrade;
@@ -116,27 +116,24 @@ function addRow() {
 
     let newType = document.createElement("input");
     newType.setAttribute("id", "type" + inputCount);
-    newType.setAttribute("placeholder", "Grade Type #" + (inputCount + 1));
     newType.setAttribute("autocomplete", "off");
     newType.setAttribute("tabindex", (tab).toString());
-    newType.setAttribute("oninput", "updateArrs();calcGrade();");
+    newType.setAttribute("oninput", "updateArrs();addOption();");
     type.appendChild(newType);
 
     let newGrade = document.createElement("input");
     newGrade.setAttribute("id", "grade" + inputCount);
-    newGrade.setAttribute("placeholder", "Grades");
     newGrade.setAttribute("autocomplete", "off");
     newGrade.setAttribute("tabindex", (tab+1).toString());
-    newGrade.setAttribute("oninput", "updateArrs();calcGrade();");
+    newGrade.setAttribute("oninput", "updateArrs();calcGrade();calcNeededGrade();");
     grade.appendChild(newGrade);
 
     let newWeight = document.createElement("input");
     newWeight.setAttribute("id", "weight" + inputCount);
-    newWeight.setAttribute("placeholder", "%");
     newWeight.setAttribute("size", "3");
     newWeight.setAttribute("autocomplete", "off");
     newWeight.setAttribute("tabindex", (tab+2).toString());
-    newWeight.setAttribute("oninput", "updateArrs();calcGrade();");
+    newWeight.setAttribute("oninput", "updateArrs();calcGrade();calcNeededGrade();");
     weight.appendChild(newWeight);
 
     inputCount++;
@@ -163,4 +160,27 @@ function removeRow() {
 
     }
 
+}
+
+function addOption() {
+
+    let arrGradeTypesCopy = []
+
+    // Clearing all options before looping through adding them
+    document.getElementById("select").innerHTML = "";
+
+    // Making array of grade types
+    for (let i = 0; i < inputCount; i++) {
+        let currentGradeType = document.getElementById("type"+i).value;
+        if (currentGradeType != "") {
+            arrGradeTypesCopy.push(currentGradeType);
+        }
+    }
+
+    // Adding options to select
+    for (let i = 0; i < arrGradeTypesCopy.length; i++) {
+        newOption = document.createElement("option")
+        newOption.text = arrGradeTypesCopy[i]
+        document.getElementById("select").appendChild(newOption)
+    }
 }

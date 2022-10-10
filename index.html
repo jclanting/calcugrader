@@ -17,21 +17,21 @@
     <div class="container">
         <div class="type" id="type">
             <label>Grade Types:</label>
-            <input id="type0" placeholder="Grade Type #1" autocomplete="off" tabindex="1" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="type1" placeholder="Grade Type #2" autocomplete="off" tabindex="4" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="type2" placeholder="Grade Type #3" autocomplete="off" tabindex="7" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="type0" placeholder="(e.g. Homework)" autocomplete="off" tabindex="1" oninput="updateArrs();addOption();">
+            <input id="type1" autocomplete="off" tabindex="4" oninput="updateArrs();addOption();">
+            <input id="type2" autocomplete="off" tabindex="7" oninput="updateArrs();addOption();">
         </div>
         <div class="grade" id="grade">
             <label>Grades:</label>
-            <input id="grade0" placeholder="Grades" autocomplete="off" tabindex="2" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="grade1" placeholder="Grades" autocomplete="off" tabindex="5" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="grade2" placeholder="Grades" autocomplete="off" tabindex="8" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="grade0" placeholder="(e.g. 100, 96, 83, 91)" autocomplete="off" tabindex="2" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="grade1" autocomplete="off" tabindex="5" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="grade2" autocomplete="off" tabindex="8" oninput="updateArrs();calcGrade();calcNeededGrade();">
         </div>
         <div class="weight" id="weight">
             <label>Weights:</label>
             <input id="weight0" placeholder="%" size="3" autocomplete="off" tabindex="3" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="weight1" placeholder="%" size="3" autocomplete="off" tabindex="6" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="weight2" placeholder="%" size="3" autocomplete="off" tabindex="9" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="weight1" size="3" autocomplete="off" tabindex="6" oninput="updateArrs();calcGrade();calcNeededGrade();">
+            <input id="weight2" size="3" autocomplete="off" tabindex="9" oninput="updateArrs();calcGrade();calcNeededGrade();">
         </div>
     </div>
 
@@ -46,7 +46,7 @@
     <br>
     
     <p id="needed_grade_text">What do I need on a(n) 
-        <input id="needed_grade_type" placeholder="Grade Type" autocomplete="off" oninput="updateArrs();calcNeededGrade();">
+        <select id="select" style="width:100px;" onchange="updateArrs();calcNeededGrade();"></select>
         grade to achieve a(n) 
         <input id="desired_grade" size="4" placeholder="Grade" autocomplete="off" oninput="updateArrs();calcNeededGrade();">
         % average?
