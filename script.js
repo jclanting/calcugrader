@@ -106,7 +106,7 @@ function calcNeededGrade() {
     }
 
     // Injecting needed grade to HTML
-    if (isNaN(neededGrade)) {
+    if (isNaN(neededGrade) || gradeType == "") {
         document.getElementById("display_needed_grade").innerHTML = "Needed grade: Check your input!";
     } else {
         document.getElementById("display_needed_grade").innerHTML = "Needed grade: " + neededGrade.toFixed(2).toString() + "%";
@@ -161,9 +161,9 @@ function removeRow() {
     if (inputCount > 1) {
 
         // Removing option from select
-        let currentType = (inputCount - 1).value
-        if (document.getElementById("type" + currentType != "")) {
-            document.getElementById("select").removeChild(document.getElementById("option" + document.getElementById("type" + currentType)));
+        let currentType = document.getElementById("type" + (inputCount - 1)).value
+        if (currentType != "") {
+            document.getElementById("select").removeChild(document.getElementById("option_" + currentType));
         }
 
         let inputsArr = ["type", "grade", "weight"]
@@ -202,8 +202,6 @@ function addOption() {
             arrGradeTypesCopy.push(currentGradeType);
         }
     }
-
-    console.log(arrGradeTypesCopy);
     
     // Adding options to select
     for (let i = 0; i < arrGradeTypesCopy.length; i++) {
