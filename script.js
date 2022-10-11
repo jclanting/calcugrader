@@ -14,7 +14,13 @@ function updateArrs() {
     // Storing arrays of grades in arrAll with weight at end
     for (let i = 0; i < inputCount; i++) {
         let arrGrades = toArray("grade"+i).map(Number);
-        arrGrades.push(parseInt(document.getElementById("weight"+i).value));
+        let weightVal = document.getElementById("weight"+i).value;
+
+        if (weightVal == "") {
+            weightVal = "0";
+        }
+
+        arrGrades.push(parseInt(weightVal));
         arrAll.push(arrGrades);
     }
 
@@ -132,6 +138,7 @@ function addRow() {
     newGrade.setAttribute("id", "grade" + inputCount);
     newGrade.setAttribute("autocomplete", "off");
     newGrade.setAttribute("tabindex", (tab+1).toString());
+    newGrade.setAttribute("oninput", "calcGrade();calcNeededGrade();")
     grade.appendChild(newGrade);
 
     let newWeight = document.createElement("input");
@@ -139,16 +146,25 @@ function addRow() {
     newWeight.setAttribute("size", "3");
     newWeight.setAttribute("autocomplete", "off");
     newWeight.setAttribute("tabindex", (tab+2).toString());
+    newWeight.setAttribute("oninput", "calcGrade();calcNeededGrade();")
     weight.appendChild(newWeight);
 
     inputCount++;
     tab += 3;
+
+    calcGrade();
 
 }
 
 function removeRow() {
 
     if (inputCount > 1) {
+
+        // Removing option from select
+        let currentType = (inputCount - 1).value
+        if (document.getElementById("type" + currentType != "")) {
+            document.getElementById("select").removeChild(document.getElementById("option" + document.getElementById("type" + currentType)));
+        }
 
         let inputsArr = ["type", "grade", "weight"]
         let parent = ""
@@ -172,10 +188,12 @@ function removeRow() {
 
 function addOption() {
 
-    let arrGradeTypesCopy = []
+    let arrGradeTypesCopy = [];
 
     // Clearing all options before looping through adding them
     document.getElementById("select").innerHTML = "";
+
+    updateArrs();
 
     // Making array of grade types
     for (let i = 0; i < inputCount; i++) {
@@ -185,10 +203,13 @@ function addOption() {
         }
     }
 
+    console.log(arrGradeTypesCopy);
+    
     // Adding options to select
     for (let i = 0; i < arrGradeTypesCopy.length; i++) {
-        newOption = document.createElement("option")
+        newOption = document.createElement("option");
         newOption.text = arrGradeTypesCopy[i];
+        newOption.setAttribute("id", "option_" + arrGradeTypesCopy[i]);
         document.getElementById("select").appendChild(newOption);
     }
 }
@@ -198,25 +219,27 @@ function stringBuilder() {
     let finalOutput = "[ ";
 
     // Actual string building separated into distinct steps
-    for (let i = 0; i < inputCount; i++) {
+    for (let i = 0; i < arrAll.length; i++) {
 
-        output = ""
+        let weightIndex = arrAll[i].length;
+        let output = "";
+
         output += "(";
-        output += arrAll[i][arrAll[i].length - 1].toString();
+        output += arrAll[i][weightIndex - 1].toString();
         output += "*("
 
-            for (let j = 0; j < arrAll[i].length - 1; j++) {
+            for (let j = 0; j < weightIndex - 1; j++) {
                 output += arrAll[i][j].toString()
                 
-                if (j < arrAll[i].length - 2) {
+                if (j < weightIndex - 2) {
                     output += "+"
                 }
             }
 
             output += "))/"
-            output += arrAll[i].length - 1
+            output += weightIndex - 1
             
-            if (i < inputCount - 1) {
+            if (i < arrAll.length - 1) {
                 output += " + "
             }
 

@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <h1 class="title">Grade Calculator</h1>
+    <h1 class="title" style="color:#f1f3f4">Grade Calculator</h1>
     
     <div class="container">
 
@@ -18,41 +18,41 @@
             <div class="input_container">
                 <div class="type" id="type">
                     <label>Grade Types:</label>
-                    <input id="type0" placeholder="(e.g. Homework)" autocomplete="off" tabindex="1" oninput="addOption()">
-                    <input id="type1" autocomplete="off" tabindex="4" oninput="addOption()">
-                    <input id="type2" autocomplete="off" tabindex="7" oninput="addOption()">
+                    <input id="type0" placeholder="(e.g. Homework)" autocomplete="off" tabindex="1" oninput="addOption();calcGrade();">
+                    <input id="type1" autocomplete="off" tabindex="4" oninput="addOption();calcGrade();">
+                    <input id="type2" autocomplete="off" tabindex="7" oninput="addOption();calcGrade();">
                 </div>
                 <div class="grade" id="grade">
                     <label>Grades:</label>
-                    <input id="grade0" placeholder="(e.g. 100, 96, 83, 91)" autocomplete="off" tabindex="2">
-                    <input id="grade1" autocomplete="off" tabindex="5">
-                    <input id="grade2" autocomplete="off" tabindex="8">
+                    <input id="grade0" placeholder="(e.g. 100, 96, 83, 91)" autocomplete="off" tabindex="2" oninput="calcGrade();calcNeededGrade();">
+                    <input id="grade1" autocomplete="off" tabindex="5" oninput="calcGrade();calcNeededGrade();">
+                    <input id="grade2" autocomplete="off" tabindex="8" oninput="calcGrade();calcNeededGrade();">
                 </div>
                 <div class="weight" id="weight">
                     <label>Weights:</label>
-                    <input id="weight0" placeholder="%" size="3" autocomplete="off" tabindex="3">
-                    <input id="weight1" size="3" autocomplete="off" tabindex="6">
-                    <input id="weight2" size="3" autocomplete="off" tabindex="9">
+                    <input id="weight0" placeholder="%" size="3" autocomplete="off" tabindex="3" oninput="calcGrade();calcNeededGrade();">
+                    <input id="weight1" size="3" autocomplete="off" tabindex="6" oninput="calcGrade();calcNeededGrade();">
+                    <input id="weight2" size="3" autocomplete="off" tabindex="9" oninput="calcGrade();calcNeededGrade();">
                 </div>
             </div>
 
             <div class="button_container">
                 <button onclick="addRow()">Add row</button>
-                <button onclick="removeRow()">Remove row</button>
+                <button onclick="removeRow();addOption();">Remove row</button>
             </div>
 
             <div class="needed_container">
                 <p id="needed_grade_text" style="margin-top:0px;">Find needed
-                    <select id="select" style="width:90px;"></select>
+                    <select id="select" style="width:90px;" onchange="calcNeededGrade()"></select>
                     grade to average
-                    <input id="desired_grade" size="4" placeholder="Grade" autocomplete="off">
+                    <input id="desired_grade" size="4" placeholder="Grade" autocomplete="off" oninput="calcNeededGrade()">
                     %
                 </p>
             </div>
             
-            <div class="calculate_container">
+            <!-- <div class="calculate_container">
                 <button style="width:100%" onclick="calcGrade();calcNeededGrade();stringBuilder();">Calculate!</button>
-            </div>
+            </div> -->
         </div>
 
         <div class="display_container">

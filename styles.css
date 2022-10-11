@@ -1,5 +1,5 @@
 body {
-    background-color: papayawhip;
+    background-color: #3c6478;
     color: black;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,7 @@ button, input {
 }
 
 .top {
+    background-color: #f1f3f4;
     padding: 10px;
     border: 1px solid black;
 }
@@ -31,6 +32,7 @@ button, input {
 }
 
 .display_container {
+    background-color: #f1f3f4;
     border: 1px solid black;
     border-top: 0;
     padding: 10px;
