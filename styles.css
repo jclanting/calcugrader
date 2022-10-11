@@ -1,6 +1,9 @@
 body {
     background-color: papayawhip;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 body, input, ::placeholder {
@@ -13,9 +16,27 @@ button, input {
     margin: 10px;
 }
 
-.container, .button_container {
+.top {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.input_container, .button_container, .calculate_container {
     display: flex;
     justify-content: center;
+}
+
+.needed_container {
+    padding-top: 10px;
+}
+
+.display_container {
+    border: 1px solid black;
+    border-top: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .type, .grade, .weight {
@@ -24,6 +45,8 @@ button, input {
     align-items: center;
 }
 
-#instructions {
-    margin-bottom: 32px;
+#display_calculation {
+    margin: 0px;
+    padding: 0px;
+    resize: vertical;
 }

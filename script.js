@@ -14,7 +14,7 @@ function updateArrs() {
     // Storing arrays of grades in arrAll with weight at end
     for (let i = 0; i < inputCount; i++) {
         let arrGrades = toArray("grade"+i).map(Number);
-        arrGrades.push(parseInt(document.getElementById("weight"+i).value) / 100);
+        arrGrades.push(parseInt(document.getElementById("weight"+i).value));
         arrAll.push(arrGrades);
     }
 
@@ -27,6 +27,8 @@ function updateArrs() {
 
 function calcGrade() {
 
+    updateArrs();
+
     // Adding all weighted grades to get final grade
     let grade = 0;
     for (let i = 0; i < inputCount; i++) {
@@ -35,10 +37,13 @@ function calcGrade() {
 
     // Injecting final grade to HTML
     if (isNaN(grade)) {
-        document.getElementById("display_grade").innerHTML = "Check your input!";
+        document.getElementById("display_grade").innerHTML = "Average grade: Check your input!";
     } else {
-        document.getElementById("display_grade").innerHTML = grade.toFixed(2).toString() + "%";
+        document.getElementById("display_grade").innerHTML = "Average grade: " + grade.toFixed(2).toString() + "%";
     }
+
+    calcNeededGrade();
+    stringBuilder();
 
 }
 
@@ -52,11 +57,13 @@ function calcWeightGrade(array) {
         sum += array[i];
     }
 
-    return (sum / (array.length - 1)) * weight;
+    return ( weight * (sum / (array.length - 1)) ) / 100;
 
 }
 
 function calcNeededGrade() {
+
+    updateArrs();
 
     let gradeType = document.getElementById("select").value;
     let desiredGrade = parseFloat(document.getElementById("desired_grade").value);
@@ -87,16 +94,16 @@ function calcNeededGrade() {
     // Peforming calculations to isolate the variable in this equation
     let inputtedGradeTypeArr = arrAll[toRemove];
     neededGrade -= sumWeightedGrades;
-    neededGrade /= ( (inputtedGradeTypeArr[inputtedGradeTypeArr.length - 1]) / (arrAll[toRemove].length) );
+    neededGrade /= ( (inputtedGradeTypeArr[inputtedGradeTypeArr.length - 1] / 100) / (arrAll[toRemove].length) );
     for (let i = 0; i < inputtedGradeTypeArr.length - 1; i++) {
         neededGrade -= inputtedGradeTypeArr[i];
     }
 
     // Injecting needed grade to HTML
     if (isNaN(neededGrade)) {
-        document.getElementById("display_needed_grade").innerHTML = "Make sure all inputs above are filled in!";
+        document.getElementById("display_needed_grade").innerHTML = "Needed grade: Check your input!";
     } else {
-        document.getElementById("display_needed_grade").innerHTML = neededGrade.toFixed(2).toString() + "%";
+        document.getElementById("display_needed_grade").innerHTML = "Needed grade: " + neededGrade.toFixed(2).toString() + "%";
     }
 
 }
@@ -118,14 +125,13 @@ function addRow() {
     newType.setAttribute("id", "type" + inputCount);
     newType.setAttribute("autocomplete", "off");
     newType.setAttribute("tabindex", (tab).toString());
-    newType.setAttribute("oninput", "updateArrs();addOption();");
+    newType.setAttribute("oninput", "addOption()");
     type.appendChild(newType);
 
     let newGrade = document.createElement("input");
     newGrade.setAttribute("id", "grade" + inputCount);
     newGrade.setAttribute("autocomplete", "off");
     newGrade.setAttribute("tabindex", (tab+1).toString());
-    newGrade.setAttribute("oninput", "updateArrs();calcGrade();calcNeededGrade();");
     grade.appendChild(newGrade);
 
     let newWeight = document.createElement("input");
@@ -133,7 +139,6 @@ function addRow() {
     newWeight.setAttribute("size", "3");
     newWeight.setAttribute("autocomplete", "off");
     newWeight.setAttribute("tabindex", (tab+2).toString());
-    newWeight.setAttribute("oninput", "updateArrs();calcGrade();calcNeededGrade();");
     weight.appendChild(newWeight);
 
     inputCount++;
@@ -149,6 +154,7 @@ function removeRow() {
         let parent = ""
         let child = ""
 
+        // Removing elements by using different strings in array
         for (let i = 0; i < inputsArr.length; i++) {
             parent = document.getElementById(inputsArr[i]);
             child = document.getElementById(inputsArr[i] + (inputCount - 1));
@@ -157,6 +163,8 @@ function removeRow() {
         
         inputCount--;
         tab -= 3;
+
+        calcGrade();
 
     }
 
@@ -180,7 +188,49 @@ function addOption() {
     // Adding options to select
     for (let i = 0; i < arrGradeTypesCopy.length; i++) {
         newOption = document.createElement("option")
-        newOption.text = arrGradeTypesCopy[i]
-        document.getElementById("select").appendChild(newOption)
+        newOption.text = arrGradeTypesCopy[i];
+        document.getElementById("select").appendChild(newOption);
     }
+}
+
+function stringBuilder() {
+
+    let finalOutput = "[ ";
+
+    // Actual string building separated into distinct steps
+    for (let i = 0; i < inputCount; i++) {
+
+        output = ""
+        output += "(";
+        output += arrAll[i][arrAll[i].length - 1].toString();
+        output += "*("
+
+            for (let j = 0; j < arrAll[i].length - 1; j++) {
+                output += arrAll[i][j].toString()
+                
+                if (j < arrAll[i].length - 2) {
+                    output += "+"
+                }
+            }
+
+            output += "))/"
+            output += arrAll[i].length - 1
+            
+            if (i < inputCount - 1) {
+                output += " + "
+            }
+
+        finalOutput += output;
+
+    }
+
+    finalOutput += " ] / 100"
+    
+    // Injecting needed grade to HTML
+    if (finalOutput.includes("NaN")) {
+        document.getElementById("display_calculation").value = "";
+    } else {
+        document.getElementById("display_calculation").value = finalOutput;
+    }
+
 }

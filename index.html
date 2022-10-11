@@ -9,51 +9,61 @@
     <title>Grade Calculator</title>
 </head>
 <body>
-
+    
     <h1 class="title">Grade Calculator</h1>
-
-    <p id="instructions"><u>Instructions</u><br><br>Begin by labeling each one of your grade types.<br>Input your grades, making sure to separate them by commas.<br>Enter weights of the different grade types as a whole number.</p>
     
     <div class="container">
-        <div class="type" id="type">
-            <label>Grade Types:</label>
-            <input id="type0" placeholder="(e.g. Homework)" autocomplete="off" tabindex="1" oninput="updateArrs();addOption();">
-            <input id="type1" autocomplete="off" tabindex="4" oninput="updateArrs();addOption();">
-            <input id="type2" autocomplete="off" tabindex="7" oninput="updateArrs();addOption();">
-        </div>
-        <div class="grade" id="grade">
-            <label>Grades:</label>
-            <input id="grade0" placeholder="(e.g. 100, 96, 83, 91)" autocomplete="off" tabindex="2" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="grade1" autocomplete="off" tabindex="5" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="grade2" autocomplete="off" tabindex="8" oninput="updateArrs();calcGrade();calcNeededGrade();">
-        </div>
-        <div class="weight" id="weight">
-            <label>Weights:</label>
-            <input id="weight0" placeholder="%" size="3" autocomplete="off" tabindex="3" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="weight1" size="3" autocomplete="off" tabindex="6" oninput="updateArrs();calcGrade();calcNeededGrade();">
-            <input id="weight2" size="3" autocomplete="off" tabindex="9" oninput="updateArrs();calcGrade();calcNeededGrade();">
-        </div>
-    </div>
 
-    <div class="button_container">
-        <button onclick="addRow()">Add row</button>
-        <button onclick="removeRow()">Remove row</button>
-    </div>
+        <div class="top">
+            <div class="input_container">
+                <div class="type" id="type">
+                    <label>Grade Types:</label>
+                    <input id="type0" placeholder="(e.g. Homework)" autocomplete="off" tabindex="1" oninput="addOption()">
+                    <input id="type1" autocomplete="off" tabindex="4" oninput="addOption()">
+                    <input id="type2" autocomplete="off" tabindex="7" oninput="addOption()">
+                </div>
+                <div class="grade" id="grade">
+                    <label>Grades:</label>
+                    <input id="grade0" placeholder="(e.g. 100, 96, 83, 91)" autocomplete="off" tabindex="2">
+                    <input id="grade1" autocomplete="off" tabindex="5">
+                    <input id="grade2" autocomplete="off" tabindex="8">
+                </div>
+                <div class="weight" id="weight">
+                    <label>Weights:</label>
+                    <input id="weight0" placeholder="%" size="3" autocomplete="off" tabindex="3">
+                    <input id="weight1" size="3" autocomplete="off" tabindex="6">
+                    <input id="weight2" size="3" autocomplete="off" tabindex="9">
+                </div>
+            </div>
 
-    <p>Your grade is: </p>
-    <p id="display_grade">Check your input!</p>
+            <div class="button_container">
+                <button onclick="addRow()">Add row</button>
+                <button onclick="removeRow()">Remove row</button>
+            </div>
 
-    <br>
+            <div class="needed_container">
+                <p id="needed_grade_text" style="margin-top:0px;">Find needed
+                    <select id="select" style="width:90px;"></select>
+                    grade to average
+                    <input id="desired_grade" size="4" placeholder="Grade" autocomplete="off">
+                    %
+                </p>
+            </div>
+            
+            <div class="calculate_container">
+                <button style="width:100%" onclick="calcGrade();calcNeededGrade();stringBuilder();">Calculate!</button>
+            </div>
+        </div>
+
+        <div class="display_container">
+            <p id="display_grade">Average grade: </p>
+            <p id="display_needed_grade">Needed grade: </p>
+            <p>Average grade calculation:</p>
+            <textarea id="display_calculation" readonly style="width:100%; height:80px;" wrap="hard" autocomplete="off"></textarea>
+        </div>
     
-    <p id="needed_grade_text">What do I need on a(n) 
-        <select id="select" style="width:100px;" onchange="updateArrs();calcNeededGrade();"></select>
-        grade to achieve a(n) 
-        <input id="desired_grade" size="4" placeholder="Grade" autocomplete="off" oninput="updateArrs();calcNeededGrade();">
-        % average?
-    </p>
-
-    <p>You need a:</p>
-    <p id="display_needed_grade">Make sure all inputs above are filled in!</p>
+    </div>
     
+
 </body>
 </html>
