@@ -1,25 +1,15 @@
-<h1>Grade Calculator</h1>
-
+<h1>CalcuGrader</h1>
+ 
 <h2>About</h2>
 
-
-A web application that can calculate your grade average using various percentage weights. Can dynamically add new input fields in order to account for more grade types with different weights. Also has the ability to calculate a grade needed in order to achieve a certain grade average.
+CalcuGrader is a web application that can calculate your grade average with different percentage weights. It can also provide the equation used to calculate said grade average as well as determine an additional score needed to achieve a specified grade average. This is a personal project I've been wanting to create since high school but never did because I didn't know where to start. Now that I'm learning web development, I figured why not put my new skills to use and make it now!
 
 <a href="https://jclanting.github.io/grade-calculator/" target="_blank">Link to website found here.</a>
 
-<h2>Planned Features</h2>
-
-<ul>
-  <li>Add a "Remove grade type" button</li>
-  <li>Automatically input grade data by uploading a file</li>
-  <li>In the needed grade calculator, change grade type input field to a dynamic dropdown menu</li>
-  <li>GPA calculator</li>
- </ul>
-
 <h2>Built With</h2>
 
-<ul>
-  <li><img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&amp;logo=html5&amp;logoColor=white" alt="HTML5"></li>
-  <li><img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&amp;logo=css3&amp;logoColor=white" alt="CSS3"></li>
-  <li><img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&amp;logo=javascript&amp;logoColor=%23F7DF1E" alt="JavaScript"></li>
-</ul>
+
+<img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&amp;logo=html5&amp;logoColor=white" alt="HTML5">
+<img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&amp;logo=css3&amp;logoColor=white" alt="CSS3">
+<img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&amp;logo=javascript&amp;logoColor=%23F7DF1E" alt="JavaScript">
+
