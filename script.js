@@ -106,7 +106,7 @@ function calcNeededGrade() {
     }
 
     // Injecting needed grade to HTML
-    if (isNaN(neededGrade) || gradeType == "") {
+    if (isNaN(neededGrade) || neededGrade == "Infinity" || gradeType == "") {
         document.getElementById("display_needed_grade").innerHTML = "Needed grade: Check your input!";
     } else {
         document.getElementById("display_needed_grade").innerHTML = "Needed grade: " + neededGrade.toFixed(2).toString() + "%";
